@@ -80,10 +80,10 @@ while ($true) {
         }
         else {
             foreach ($vm in 1..7) {
-                if ($vm -ne [int]$goodRes) {
+                # if ($vm -ne [int]$goodRes) {
                     & $memucPath -i $vm adb "shell am force-stop com.scopely.monopolygo"
                     # & $memucPath -i $vm adb "shell rm -rf /data/data/com.scopely.monopolygo/cache/*"
-                }
+                # }
             }
         }    
 
