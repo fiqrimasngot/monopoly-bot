@@ -3,6 +3,7 @@ function Start-Game {
         [string]$memucPath
     )
 
+    $tapRoll = "386 1039"
     $tapMultiplier = "527 901" 
     $packageName = "com.scopely.monopolygo"
 
@@ -40,10 +41,10 @@ function Start-Game {
 
         # Module to click on multiplier button
         if (![string]::IsNullOrWhiteSpace($multiplier)) {
-            $tapCommand = "shell input tap $tapMultiplier"
+            $tapMultiplierCommand = "shell input tap $tapMultiplier"
             for ($i = 1; $i -le [int]$multiplier; $i++) {
                 foreach ($vm in 1..7) {
-                    & $memucPath -i $vm adb $tapCommand
+                    & $memucPath -i $vm adb $tapMultiplierCommand
                 }
             }            
         }
@@ -57,10 +58,9 @@ function Start-Game {
             Disable-NetAdapter -Name "Ethernet" -Confirm:$false
 
             # Click on the Roll button on each VMs
+            $tapRollCommand = "shell input tap $tapRoll"
             foreach ($vm in 1..7) {
-                & $memucPath -i $vm adb "shell input tap 386 1039"
-                # & $memucPath disconnect -i $vm    
-                # & $memucPath -i $vm adb "shell input tap 379 1029"
+                & $memucPath -i $vm adb $tapRollCommand
             }
             
             $goodRes = Read-Host "Enter the VM ID (1-7), or leave it blank to abort."
