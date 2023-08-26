@@ -18,13 +18,13 @@ while ($true) {
     Enable-NetAdapter -Name "Ethernet"
 
     if (![string]::IsNullOrWhiteSpace($goodRes)) {
-        foreach ($vm in 1..7) {
-            if ($vm -eq [int]$goodRes) {
-                & $memucPath -i $vm adb "shell am force-stop com.scopely.monopolygo"
-                & $memucPath -i $vm adb "shell rm -rf /data/data/com.scopely.monopolygo/cache/*"
-            }
-        }    
-        $waitForUser = Read-Host "Restart the game? Enter to proceed"
+        # foreach ($vm in 1..7) {
+        #     if ($vm -eq [int]$goodRes) {
+        #         & $memucPath -i $vm adb "shell am force-stop com.scopely.monopolygo"
+        #         & $memucPath -i $vm adb "shell rm -rf /data/data/com.scopely.monopolygo/cache/*"
+        #     }
+        # }    
+        # $waitForUser = Read-Host "Restart the game? Enter to proceed"
         foreach ($vm in 1..7) {
             if ($vm -eq [int]$goodRes) {
                 & $memucPath startapp com.scopely.monopolygo -i $vm
@@ -57,11 +57,10 @@ while ($true) {
         }
     }
     
-    $goodRes = Read-Host "Roll DICE? Press Enter to proceed else, which VM ID? (1-7) would like to keep open"
+    $rollOrRestart = Read-Host "Roll DICE? Press Enter to proceed else, type yes if you're prompted to restart"
 
-    
 
-    if ([string]::IsNullOrWhiteSpace($goodRes)) {
+    if ([string]::IsNullOrWhiteSpace($rollOrRestart)) {
         Disable-NetAdapter -Name "Ethernet" -Confirm:$false
         
         foreach ($vm in 1..7) {
@@ -90,11 +89,12 @@ while ($true) {
     }
     else {
         foreach ($vm in 1..7) {
-            if ($vm -ne [int]$goodRes) {
-                & $memucPath -i $vm adb "shell am force-stop com.scopely.monopolygo"
+            # if ($vm -ne [int]$goodRes) {
+                & $memucPath -i $vm adb "shell input tap 435 800"
+                # & $memucPath -i $vm adb "shell am force-stop com.scopely.monopolygo"
                 # & $memucPath -i $vm adb "shell rm -rf /data/data/com.scopely.monopolygo/cache/*"
                 # & $memucPath disconnect -i $vm    
-            }
+            # }
         }
         
 
