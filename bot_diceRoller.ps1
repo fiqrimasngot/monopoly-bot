@@ -3,7 +3,7 @@ function Start-Game {
         [string]$memucPath
     )
 
-    $tapLocation = "527 901" 
+    $tapMultiplier = "527 901" 
     $packageName = "com.scopely.monopolygo"
 
     while ($true) {
@@ -38,13 +38,12 @@ function Start-Game {
             & $memucPath startapp $packageName -i $vm            
         }
 
-        # module to click on multiplier button
+        # Module to click on multiplier button
         if (![string]::IsNullOrWhiteSpace($multiplier)) {
-            # Your game logic with multiplier
+            $tapCommand = "shell input tap $tapMultiplier"
             for ($i = 1; $i -le [int]$multiplier; $i++) {
                 foreach ($vm in 1..7) {
-                    & $memucPath -i $vm adb "shell input tap 527 901"
-                    # & $memucPath -i $vm adb "shell input tap 527 936"
+                    & $memucPath -i $vm adb $tapCommand
                 }
             }            
         }
@@ -54,6 +53,7 @@ function Start-Game {
 
         if ([string]::IsNullOrWhiteSpace($rollOrRestart)) {
             # Your game logic on rolling dice
+            # Disabling progress syncing by disconnecting internet
             Disable-NetAdapter -Name "Ethernet" -Confirm:$false
 
             # Click on the Roll button on each VMs
