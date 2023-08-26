@@ -26,7 +26,7 @@ function Start-Game {
 
         # Make the bot to click the multiplier button x1 > x100 takes 7 time clicks
         # Enter nothing just simply starting the apps
-        $multiplier = Read-Host "Include a multiplier and initiate the game? Leave the input empty if you only want to start the game."
+        $multiplier = Read-Host "Include a multiplier and initiate the game? Leave the input empty if you only want to start the game "
 
         # Ensure all VM and apps starting up
         foreach ($vm in 1..7) {
@@ -51,7 +51,7 @@ function Start-Game {
         }
 
         # sometime the apps do crash, bot will take care to click the button
-        $rollOrRestart = Read-Host "Roll the dice? Press Enter to proceed; otherwise, type 'yes' if prompted to restart."
+        $rollOrRestart = Read-Host "Roll the dice? Press Enter to proceed; otherwise, type 'yes' if prompted to restart "
 
         if ([string]::IsNullOrWhiteSpace($rollOrRestart)) {
             # Your game logic on rolling dice
@@ -64,7 +64,7 @@ function Start-Game {
                 & $memucPath -i $vm adb $tapRollCommand
             }
             
-            $goodRes = Read-Host "Enter the VM ID (1-7), or leave it blank to abort."
+            $goodRes = Read-Host "Enter the VM ID (1-7), or leave it blank to abort "
             
             foreach ($vm in 1..7) {
                 if (![string]::IsNullOrWhiteSpace($goodRes) -or $goodRes -ne $vm) {
