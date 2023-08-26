@@ -35,8 +35,7 @@ function Start-Game {
             }
             # & $memucPath connect -i $vm    
             # & $memucPath -i $vm adb "kill-server"
-            & $memucPath startapp com.scopely.monopolygo -i $vm
-            
+            & $memucPath startapp $packageName -i $vm            
         }
 
         # module to click on multiplier button
