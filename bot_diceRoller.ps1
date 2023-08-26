@@ -4,6 +4,7 @@ function Start-Game {
     )
 
     $tapRoll = "386 1039"
+    $tapRestart = "435 800"
     $tapMultiplier = "527 901" 
     $packageName = "com.scopely.monopolygo"
 
@@ -65,7 +66,6 @@ function Start-Game {
             
             $goodRes = Read-Host "Enter the VM ID (1-7), or leave it blank to abort."
             
-
             foreach ($vm in 1..7) {
                 if (![string]::IsNullOrWhiteSpace($goodRes) -or $goodRes -ne $vm) {
                     & $memucPath -i $vm adb "shell am force-stop $packageName"
@@ -75,13 +75,11 @@ function Start-Game {
 
         } else {
             # Your game logic for restart
+            $tapRestartCommand = "shell input tap $tapRestart"
             foreach ($vm in 1..7) {
-                # if ($vm -ne [int]$goodRes) {
-                    & $memucPath -i $vm adb "shell input tap 435 800"
-                    # & $memucPath -i $vm adb "shell am force-stop com.scopely.monopolygo"
-                    # & $memucPath -i $vm adb "shell rm -rf /data/data/com.scopely.monopolygo/cache/*"
-                    # & $memucPath disconnect -i $vm    
-                # }
+                if (![string]::IsNullOrWhiteSpace($goodRes) -or $goodRes -ne $vm) {
+                    & $memucPath -i $vm adb $tapRestartCommand
+                }
             }
         }
     }
