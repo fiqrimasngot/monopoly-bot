@@ -1,8 +1,6 @@
 function Start-Game {
     param (
-        [string]$memucPath,
-        [string]$goodRes,
-        [string]$multiplier
+        [string]$memucPath
     )
 
     while ($true) {
