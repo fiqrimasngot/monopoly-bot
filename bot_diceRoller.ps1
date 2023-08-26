@@ -3,6 +3,9 @@ function Start-Game {
         [string]$memucPath
     )
 
+    $tapLocation = "527 901" 
+    $packageName = "com.scopely.monopolygo"
+
     while ($true) {
         # Start game logic here
         # Restart the Ethernet adapter for syncing
