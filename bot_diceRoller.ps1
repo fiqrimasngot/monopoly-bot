@@ -66,22 +66,11 @@ function Start-Game {
             $goodRes = Read-Host "Enter the VM ID (1-7), or leave it blank to abort."
             
 
-            if ([string]::IsNullOrWhiteSpace($goodRes)) {
-                # Closing all apps
-                foreach ($vm in 1..7) {
-                    & $memucPath -i $vm adb "shell am force-stop com.scopely.monopolygo"
-                    # & $memucPath -i $vm adb "shell rm -rf /data/data/com.scopely.monopolygo/cache/*"
+            foreach ($vm in 1..7) {
+                if (![string]::IsNullOrWhiteSpace($goodRes) -or $goodRes -ne $vm) {
+                    & $memucPath -i $vm adb "shell am force-stop $packageName"
                 }
             }
-            else {
-                # Closing all apps when aborting without restarting the apps
-                foreach ($vm in 1..7) {
-                    # if ($vm -ne [int]$goodRes) {
-                        & $memucPath -i $vm adb "shell am force-stop com.scopely.monopolygo"
-                        # & $memucPath -i $vm adb "shell rm -rf /data/data/com.scopely.monopolygo/cache/*"
-                    # }
-                }
-            } 
 
 
         } else {
