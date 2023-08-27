@@ -77,9 +77,11 @@ function Start-Game {
         } elseif ($rollOrRestart -eq "ads") {
             # Run the $tapAdCloseCommand logic here
             $tapCloseAdsCommand = "shell input tap $tapCloseAds"
-            foreach ($vm in 1..7) {
-                if (![string]::IsNullOrWhiteSpace($goodRes) -or $goodRes -ne $vm) {
-                    & $memucPath -i $vm adb $tapCloseAdsCommand
+            for ($i = 1; $i -le 2; $i++) {
+                foreach ($vm in 1..7) {
+                    if (![string]::IsNullOrWhiteSpace($goodRes) -or $goodRes -ne $vm) {
+                        & $memucPath -i $vm adb $tapCloseAdsCommand
+                    }
                 }
             }            
         } else {
