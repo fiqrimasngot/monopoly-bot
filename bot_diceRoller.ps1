@@ -39,7 +39,7 @@ function Start-Game {
             # & $memucPath -i $vm adb "kill-server"
             & $memucPath startapp $packageName -i $vm            
         }
-        & $memucPath sortwin
+        # & $memucPath sortwin
 
         # Module to click on multiplier button
         if (![string]::IsNullOrWhiteSpace($multiplier)) {
