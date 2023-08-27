@@ -53,7 +53,7 @@ function Start-Game {
         }
 
         # sometime the apps do crash, bot will take care to click the button
-        $rollOrRestart = Read-Host "Roll the dice? Press Enter to proceed; otherwise, type 'yes' if prompted to restart "
+        $rollOrRestart = Read-Host "Roll the dice. Press Enter to proceed. Otherwise, type 'ads' if prompted to close ads, or type anything to restart. "
 
         if ([string]::IsNullOrWhiteSpace($rollOrRestart)) {
             # Your game logic on rolling dice
