@@ -84,6 +84,14 @@ function Start-Game {
                     }
                 }
             }            
+        } elseif ($rollOrRestart -eq "ad") {
+            # Run the $tapAdCloseCommand logic here
+            $tapCloseAdsCommand = "shell input tap $tapCloseAds"
+            foreach ($vm in 1..7) {
+                if (![string]::IsNullOrWhiteSpace($goodRes) -or $goodRes -ne $vm) {
+                    & $memucPath -i $vm adb $tapCloseAdsCommand
+                }
+            }
         } else {
             # Your game logic for restart
             $tapRestartCommand = "shell input tap $tapRestart"
