@@ -6,6 +6,7 @@ function Start-Game {
     $tapRoll = "386 1039"
     $tapRestart = "435 800"
     $tapMultiplier = "527 901" 
+    $tapCloseAdsPickOneBanner = "698 209" 
     $tapCloseAds = "685 167"
     $packageName = "com.scopely.monopolygo"
 
@@ -86,7 +87,7 @@ function Start-Game {
             }            
         } elseif ($rollOrRestart -eq "ad") {
             # Run the $tapAdCloseCommand logic here
-            $tapCloseAdsCommand = "shell input tap $tapCloseAds"
+            $tapCloseAdsCommand = "shell input tap $tapCloseAdsPickOneBanner"
             foreach ($vm in 1..7) {
                 if (![string]::IsNullOrWhiteSpace($goodRes) -or $goodRes -ne $vm) {
                     & $memucPath -i $vm adb $tapCloseAdsCommand
